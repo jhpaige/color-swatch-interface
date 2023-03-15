@@ -1,0 +1,6 @@
+.wrapper {
+  display: flex;
+  width: fit-content;
+  margin: auto;
+  font-family: 'Source Serif Pro', serif;
+}

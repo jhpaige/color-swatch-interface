@@ -1,10 +1,22 @@
-import React from 'react';
+import { Container } from '@mui/material';
+import React, { useEffect } from 'react';
+import ColorSwatch from './ColorSwatch';
 
-const MainPage = () => {
+const MainPage = ({ allColors }) => {
+
+
+
+  useEffect(() => {
+    console.log(allColors);
+  }, [ allColors ])
+
   return (
-    <div className="wrapper">
-      
-    </div>
+    <Container id="mainpage-container" sx={{ height: '100%' }}>
+      {JSON.stringify(allColors)}
+      {allColors.map(color => {
+        <ColorSwatch key={color.code} colorCode={color.code} />
+      })}
+    </Container>
   )
 }
 

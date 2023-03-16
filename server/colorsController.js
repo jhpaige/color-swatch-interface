@@ -6,7 +6,10 @@ const colorsController = {};
 colorsController.getColors = (req, res, next) => {
   
   const queryString = `
-    SELECT * FROM colors;
+    SELECT (label_id, labels.name AS label, colors.name AS color, code)
+    FROM labels
+    LEFT JOIN colors
+    ON labels.color_id = colors.name;
   `;
   db.query(queryString).then((data) => {
     if (!data.rows.length){
@@ -14,9 +17,13 @@ colorsController.getColors = (req, res, next) => {
       res.locals.colors= false
       return next();
     }
-    const { username, bio } = data.rows[0];
-    res.locals.userInfo = { username, bio };
-    res.locals.foundUser = true;
+    // Array to Store colors, codes, and labels
+    const dataArr = [];
+    for (let i = 0; i < data.rows.length; i++) {
+      dataArr.push(data.rows[i]);
+    }
+    
+    res.locals.colors = { dataArr };
     return next();
   }).catch((err) => next({
     log: `Error in colorsController.getColors: ${err}`,

@@ -1,21 +1,16 @@
-// SQL to drop everything in DB
-
+// Script to drop tables from DB
 const db = require('./swatchifyModel');
 
-// Dropping tables from database to reset
-const queryString = `
-  DROP TABLE labels;
-  DROP TABLE colors;
-`;
+const dropDb = async () => {
 
-db.query(queryString).then((data) => {
-  if (!data.rows.length){
-    console.log('dropping successful');
-    return next();
-  }
-  return next();
-}).catch((err) => next({
-  log: `Error in dropDb: ${err}`,
-  status: 400,
-  message: 'Query to drop tables unsuccessful, check server',
-}));
+  await db.query('DROP TABLE colors;').then((data) => {
+  }).catch((err) => console.log(`Error dropping colors table: ${err}`));
+
+  await db.query('DROP TABLE labels;').then((data) => {
+  }).catch((err) => console.log(`Error dropping labels table: ${err}`));
+
+  return;
+  
+}
+
+dropDb();

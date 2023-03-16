@@ -6,24 +6,24 @@ const colorsController = {};
 colorsController.getColors = (req, res, next) => {
   
   const queryString = `
-    SELECT (label_id, labels.name AS label, colors.name AS color, code)
+    SELECT labels.id, colors.name AS color, code
     FROM labels
     LEFT JOIN colors
-    ON labels.color_id = colors.name;
+    ON labels.color_id = colors.id;
   `;
   db.query(queryString).then((data) => {
     if (!data.rows.length){
-      console.log('no colors');
-      res.locals.colors= false
+      console.log('No colors in db');
+      res.locals.colorsInfo= false
       return next();
     }
     // Array to Store colors, codes, and labels
-    const dataArr = [];
+    const colorsArr = [];
     for (let i = 0; i < data.rows.length; i++) {
-      dataArr.push(data.rows[i]);
+      colorsArr.push(data.rows[i]);
     }
     
-    res.locals.colors = { dataArr };
+    res.locals.colorsInfo = { colorsArr };
     return next();
   }).catch((err) => next({
     log: `Error in colorsController.getColors: ${err}`,

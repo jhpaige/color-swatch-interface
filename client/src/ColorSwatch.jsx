@@ -27,7 +27,7 @@ const ColorSwatch = ({ colorCode, selectedCode, handleDetailClick }) => {
       <Box sx={{
         padding: '10px',
         width: '100px'
-      }}>#{colorCode.toLowerCase()}</Box>
+      }}>#{colorCode}</Box>
     </Card>
   )
 }

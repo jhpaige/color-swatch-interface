@@ -28,6 +28,8 @@ const theme = createTheme({
 const App = () => {
 
   const [ allColors, setAllColors ] = useState([]);
+  const [ selectedCode, setSelectedCode ] = useState(null);
+  const [ pageSwatches, setPageSwatches ] = useState([]);
 
   // Fetches colors from server on page load
   const fetchColors = async () => {
@@ -43,6 +45,22 @@ const App = () => {
   }
   if (allColors.length == 0) fetchColors();
 
+  const handleDetailClick = (newSelectedCode) => {
+    setSelectedCode(newSelectedCode);
+    const pagesArr = [];
+    for (let i = 0; i < allColors.length; i++) {
+      if (allColors[i].code == newSelectedCode) {
+        for (let j = i; j <= i + 4; j++) {
+          console.log(j);
+          pagesArr.push(allColors[j]);
+          if (j == allColors.length - 1) break;
+        };
+        break;
+      };
+    };
+    setPageSwatches(pagesArr);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Box id="app-container" sx={{
@@ -56,8 +74,8 @@ const App = () => {
           display: 'flex',
           height: '100%'
         }}>
-          <Sidebar />
-          <MainPage inColors={allColors}/>
+          <Sidebar setSelectedCode={setSelectedCode} allColors={allColors} handleDetailClick={handleDetailClick}/>
+          <MainPage inColors={allColors} selectedCode={selectedCode} setSelectedCode={setSelectedCode} handleDetailClick={handleDetailClick} pageSwatches={pageSwatches} setPageSwatches={setPageSwatches}/>
         </Container>
       </Box>
     </ThemeProvider>

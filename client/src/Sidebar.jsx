@@ -2,7 +2,14 @@ import React from 'react';
 import { Container, Button, Box } from '@mui/material';
 import './Sidebar.css'
 
-const Sidebar = () => {
+const Sidebar = ({ setSelectedCode, allColors, handleDetailClick }) => {
+
+  const handleRandomColor = () => {
+    const randIndex = Math.floor(Math.random() * allColors.length);
+    setSelectedCode(allColors[randIndex].code)
+    handleDetailClick(allColors[randIndex].code)
+  }
+
   return (
     <Box boxShadow='2' sx={{borderRight: 0.2, borderColor: "primary.main"}}>
       <Container id="sidebar-container" disableGutters sx={{
@@ -13,7 +20,7 @@ const Sidebar = () => {
         width: 'fit-content',
         height: '100%'
       }}>
-        <Button variant="outlined" sx={{
+        <Button variant="outlined" onClick={handleRandomColor} sx={{
           backgroundColor: 'white',
           margin: '20px',
           marginTop: '40px',

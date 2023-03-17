@@ -2,12 +2,10 @@ import { Container, Grid, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ColorSwatch from './ColorSwatch';
 
-const MainPage = ({ inColors }) => {
+const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPageSwatches, handleDetailClick }) => {
 
-  const [pageSwatches, setPageSwatches] = useState([]);
   const [pageNums, setPageNums] = useState([]);
   const [currPage, setCurrPage] = useState(null);
-  const [selectedCode, setSelectedCode] = useState(null);
 
   // Sets initial value for page swatches
   if (currPage == null && inColors.length > 0) {
@@ -35,22 +33,6 @@ const MainPage = ({ inColors }) => {
       resetPage();
     }
   }, [currPage]);
-
-  const handleDetailClick = (newSelectedCode) => {
-    setSelectedCode(newSelectedCode);
-    const pagesArr = [];
-    for (let i = 0; i < inColors.length; i++) {
-      if (inColors[i].code == newSelectedCode) {
-        for (let j = i; j <= i + 4; j++) {
-          console.log(j);
-          pagesArr.push(inColors[j]);
-          if (j == inColors.length - 1) break;
-        };
-        break;
-      };
-    };
-    setPageSwatches(pagesArr);
-  }
   
   const handleClearClick = () => {
     setSelectedCode(null);

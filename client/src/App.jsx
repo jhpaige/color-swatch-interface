@@ -5,7 +5,7 @@ import MainPage from './MainPage';
 import './App.css';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 
 const font =  "'Source Serif Pro', serif";
 const theme = createTheme({
@@ -45,11 +45,11 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container id="app-container" disableGutters sx={{
+      <Box id="app-container" sx={{
         display: 'flex',
         flexDirection: 'column',
         width: '100vw',
-        height: '100vh'
+        minHeight: '100vh',
       }}>
         <Navbar />
         <Container disableGutters id="app-page-container" sx={{
@@ -59,7 +59,7 @@ const App = () => {
           <Sidebar />
           <MainPage inColors={allColors}/>
         </Container>
-      </Container>
+      </Box>
     </ThemeProvider>
   )
 }

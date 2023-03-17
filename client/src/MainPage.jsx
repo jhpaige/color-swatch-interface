@@ -7,6 +7,7 @@ const MainPage = ({ inColors }) => {
   const [pageSwatches, setPageSwatches] = useState([]);
   const [pageNums, setPageNums] = useState([]);
   const [currPage, setCurrPage] = useState(null);
+  const [selectedCode, setSelectedCode] = useState(null);
 
   // Sets initial value for page swatches
   if (currPage == null && inColors.length > 0) {
@@ -18,20 +19,43 @@ const MainPage = ({ inColors }) => {
     setPageNums(pagesArr);
   }
 
-  useEffect(() => {
-    if (inColors.length > 0) {
-      const pagesArr = [];
-      const startIndex = (currPage - 1) * 12
-      for (let i = startIndex; i < startIndex + 12; i++) {
-        if (i >= inColors.length) break;
-        pagesArr.push(inColors[i]);
-      }
-      console.log(pagesArr);
-      setPageSwatches(pagesArr);
+  const resetPage = () => {
+    const pagesArr = [];
+    const startIndex = (currPage - 1) * 12
+    for (let i = startIndex; i < startIndex + 12; i++) {
+      if (i >= inColors.length) break;
+      pagesArr.push(inColors[i]);
     }
-  }, [currPage])
+    console.log(pagesArr);
+    setPageSwatches(pagesArr);
+  }
 
-  // Creates pages from inputted colors
+  useEffect(() => {
+    if (inColors.length > 0 && selectedCode == null) {
+      resetPage();
+    }
+  }, [currPage]);
+
+  const handleDetailClick = (newSelectedCode) => {
+    setSelectedCode(newSelectedCode);
+    const pagesArr = [];
+    for (let i = 0; i < inColors.length; i++) {
+      if (inColors[i].code == newSelectedCode) {
+        for (let j = i; j <= i + 4; j++) {
+          console.log(j);
+          pagesArr.push(inColors[j]);
+          if (j == inColors.length - 1) break;
+        };
+        break;
+      };
+    };
+    setPageSwatches(pagesArr);
+  }
+  
+  const handleClearClick = () => {
+    setSelectedCode(null);
+    resetPage();
+  }
 
   return (
     <Container
@@ -53,11 +77,16 @@ const MainPage = ({ inColors }) => {
       >
         {pageSwatches.map(color => {
           return (
-            <Grid key={'GridItem' + color.code} xs={6} sm={4} md={3} spacing={2} item sx={{
-              alignItems: 'center',
-              width: 'fit-content'
-            }}>
-              <ColorSwatch key={'ColorSwatch' + color.code} colorCode={color.code} />
+            <Grid key={'GridItem' + color.code}
+              xs={color.code == selectedCode ? 12 : 6}
+              sm={color.code == selectedCode ? 12 : 4}
+              md={color.code == selectedCode ? 12 : 3} item sx={{
+                alignItems: 'center',
+                width: color.code != selectedCode ? 'fit-content' : '100%',
+                height: color.code != selectedCode ? 'fit-content' : '60%'
+              }}
+            >
+              <ColorSwatch key={'ColorSwatch' + color.code} colorCode={color.code} selectedCode={selectedCode} handleDetailClick={handleDetailClick} />
             </Grid>
           )
         })}
@@ -67,18 +96,29 @@ const MainPage = ({ inColors }) => {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        {pageNums.map(pageNum => {
+        {selectedCode == null ?
+        pageNums.map(pageNum => {
           return (<Button key={'PageButton' + pageNum} onClick={() => setCurrPage(pageNum)}
             sx={{
               minWidth: '0px',
               width: 'fit-content',
               textDecoration: currPage == pageNum ? 'underline' : 'none',
-              fontWeight: currPage == pageNum ? 'bold' : 'normal'
+              fontWeight: currPage == pageNum ? 'bold' : 'normal',
             }}>
               {pageNum}
             </Button>
           );
-        })}
+        }) :
+        <Button variant="outlined" onClick={handleClearClick} sx={{
+          backgroundColor: 'white',
+          margin: '20px',
+          marginTop: '40px',
+          whiteSpace: 'nowrap',
+          paddingLeft: '25px',
+          paddingRight: '25px'
+        }}>
+          Clear
+        </Button>}
       </Container>
     </Container>
   )

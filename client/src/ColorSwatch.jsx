@@ -8,6 +8,7 @@ const ColorSwatch = ({ colorCode, selectedCode, handleDetailClick }) => {
       onClick={() => handleDetailClick(colorCode)}
       sx={{
         width: colorCode != selectedCode ? '120px' : '100%',
+        height: colorCode != selectedCode ? '156px' : '100%',
         margin: 'auto',
         marginBottom: '20px',
         border: colorCode != selectedCode ? 0 : 0.8,
@@ -18,7 +19,7 @@ const ColorSwatch = ({ colorCode, selectedCode, handleDetailClick }) => {
         },
     }}>
       <Box sx={{
-        height: colorCode != selectedCode ? '120px' : '480px',
+        height: colorCode != selectedCode ? selectedCode != null ? '100px' : '120px' : 'calc(100% - 36px)',
         width: colorCode != selectedCode ? '120px' : '100%',
         backgroundColor: `#${colorCode}`
       }}/>

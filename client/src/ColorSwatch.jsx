@@ -4,14 +4,23 @@ import React from 'react';
 const ColorSwatch = ({ colorCode }) => {
   return (
     <Card id="color-palette-box" sx={{
-      '&:hover': { boxShadow: 5, cursor: 'pointer' },
+      width: '120px',
+      margin: 'auto',
+      marginBottom: '20px',
+      '&:hover': {
+        boxShadow: 5,
+        cursor: 'pointer',
+      },
     }}>
       <Box sx={{
         height: '120px',
         width: '120px',
         backgroundColor: `#${colorCode}`
       }}/>
-      <Box sx={{padding: '10px'}}>#{colorCode}</Box>
+      <Box sx={{
+        padding: '10px',
+        width: '100px'
+      }}>#{colorCode}</Box>
     </Card>
   )
 }

@@ -49,8 +49,7 @@ const App = () => {
         display: 'flex',
         flexDirection: 'column',
         width: '100vw',
-        height: '100vh',
-        margin: 'auto'
+        height: '100vh'
       }}>
         <Navbar />
         <Container disableGutters id="app-page-container" sx={{
@@ -58,7 +57,7 @@ const App = () => {
           height: '100%'
         }}>
           <Sidebar />
-          <MainPage allColors={allColors}/>
+          <MainPage inColors={allColors}/>
         </Container>
       </Container>
     </ThemeProvider>

@@ -63,20 +63,24 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box id="app-container" sx={{
+      <Box id="app-box" sx={{
         display: 'flex',
         flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: '100vw',
         minHeight: '100vh',
+        margin: 'auto'
       }}>
         <Navbar />
-        <Container disableGutters id="app-page-container" sx={{
+        <Box id="app-page-box" sx={{
           display: 'flex',
-          height: '100%'
+          height: '100%',
+          minWidth: '100vw'
         }}>
           <Sidebar setSelectedCode={setSelectedCode} allColors={allColors} handleDetailClick={handleDetailClick}/>
           <MainPage inColors={allColors} selectedCode={selectedCode} setSelectedCode={setSelectedCode} handleDetailClick={handleDetailClick} pageSwatches={pageSwatches} setPageSwatches={setPageSwatches}/>
-        </Container>
+        </Box>
       </Box>
     </ThemeProvider>
   )

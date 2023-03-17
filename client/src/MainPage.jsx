@@ -1,13 +1,18 @@
+// Import MUI components and React
 import { Container, Grid, Button, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+
+// Import ColorSwatch component
 import ColorSwatch from './ColorSwatch';
 
+// Define MainPage component
 const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPageSwatches, handleDetailClick }) => {
 
+  // Declare state variables and their setter functions
   const [pageNums, setPageNums] = useState([]);
   const [currPage, setCurrPage] = useState(null);
 
-  // Sets initial value for page swatches
+  // Set initial values for pagination number buttons
   if (currPage == null && inColors.length > 0) {
     setCurrPage(1);
     const pagesArr = [];
@@ -17,6 +22,7 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
     setPageNums(pagesArr);
   }
 
+  // Define function to reset page swatches
   const resetPage = () => {
     const pagesArr = [];
     const startIndex = (currPage - 1) * 12
@@ -24,21 +30,23 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
       if (i >= inColors.length) break;
       pagesArr.push(inColors[i]);
     }
-    console.log(pagesArr);
     setPageSwatches(pagesArr);
   }
 
+  // Use effect hook to reset page swatches on currPage change
   useEffect(() => {
     if (inColors.length > 0 && selectedCode == null) {
       resetPage();
     }
   }, [currPage]);
   
+  // Handle click on "Clear" button
   const handleClearClick = () => {
     setSelectedCode(null);
     resetPage();
   }
 
+  // Render the UI
   return (
     <Box
     id="mainpage-box"
@@ -49,6 +57,7 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
       justifyContent: 'space-between',
       width: '100%'
     }}>
+      {/* Render the color swatches */}
       <Grid
         container
         direction="row"
@@ -79,6 +88,8 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
           )
         })}
       </Grid>
+
+      {/* Render the pagination buttons */}
       <Container sx={{
         display: 'flex',
         alignItems: 'center',
@@ -110,8 +121,9 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
           Clear
         </Button>}
       </Container>
-    </Box>
+    </Box>    
   )
 }
 
+// Export MainPage Component
 export default MainPage;

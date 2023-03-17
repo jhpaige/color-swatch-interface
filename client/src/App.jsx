@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+// Import React and useState hook from React library
+import React, { useState } from 'react';
+
+// Import Navbar, Sidebar and MainPage components
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import MainPage from './MainPage';
+
+// Import styles from App.css
 import './App.css';
 
+// Import MUI theme and Box components
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Container, Box } from '@mui/material';
+import { Box } from '@mui/material';
 
+// Set custom font
 const font =  "'Source Serif Pro', serif";
+
+// Create MUI theme
 const theme = createTheme({
   typography: {
     fontFamily: font,
@@ -25,8 +34,10 @@ const theme = createTheme({
   }
 })
 
+// Define App component
 const App = () => {
 
+  // Declare state variables and their setter functions
   const [ allColors, setAllColors ] = useState([]);
   const [ selectedCode, setSelectedCode ] = useState(null);
   const [ pageSwatches, setPageSwatches ] = useState([]);
@@ -43,8 +54,11 @@ const App = () => {
       return { success: false };
     }
   }
+
+  // Call fetchColors function if allColors array is empty
   if (allColors.length == 0) fetchColors();
 
+  // Handle click on color swatch in Sidebar
   const handleDetailClick = (newSelectedCode) => {
     setSelectedCode(newSelectedCode);
     const pagesArr = [];
@@ -60,6 +74,7 @@ const App = () => {
     setPageSwatches(pagesArr);
   }
 
+  // Render the UI
   return (
     <ThemeProvider theme={theme}>
       <Box id="app-box" sx={{
@@ -71,13 +86,16 @@ const App = () => {
         minHeight: '100vh',
         margin: 'auto'
       }}>
+        {/* Render Navbar component */}
         <Navbar />
         <Box id="app-page-box" sx={{
           display: 'flex',
           height: '100%',
           minWidth: '100vw'
         }}>
+          {/* Render Sidebar component */}
           <Sidebar setSelectedCode={setSelectedCode} allColors={allColors} handleDetailClick={handleDetailClick}/>
+          {/* Render MainPage component */}
           <MainPage inColors={allColors} selectedCode={selectedCode} setSelectedCode={setSelectedCode} handleDetailClick={handleDetailClick} pageSwatches={pageSwatches} setPageSwatches={setPageSwatches}/>
         </Box>
       </Box>
@@ -85,4 +103,5 @@ const App = () => {
   )
 }
 
+// Export App component
 export default App;

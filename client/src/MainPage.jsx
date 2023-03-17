@@ -1,4 +1,4 @@
-import { Container, Grid, Button } from '@mui/material';
+import { Container, Grid, Button, Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ColorSwatch from './ColorSwatch';
 
@@ -40,15 +40,14 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
   }
 
   return (
-    <Container
-    id="mainpage-container"
+    <Box
+    id="mainpage-box"
     sx={{
-      height: '100%',
-      paddingTop: '24px',
-      paddingBottom: '24px',
+      minHeight: 'calc(100vh - 69px)',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      width: '100%'
     }}>
       <Grid
         container
@@ -56,6 +55,10 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
         justifyContent="center"
         alignItems="center"
         height="100%"
+        padding='20px'
+        paddingBottom={0}
+        paddingTop={0}
+        marginTop='20px'
       >
         {pageSwatches.map(color => {
           return (
@@ -86,6 +89,7 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
               width: 'fit-content',
               textDecoration: currPage == pageNum ? 'underline' : 'none',
               fontWeight: currPage == pageNum ? 'bold' : 'normal',
+              marginBottom: '20px'
             }}>
               {pageNum}
             </Button>
@@ -94,15 +98,15 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
         <Button variant="outlined" onClick={handleClearClick} sx={{
           backgroundColor: 'white',
           margin: '20px',
-          marginTop: '40px',
           whiteSpace: 'nowrap',
           paddingLeft: '25px',
-          paddingRight: '25px'
+          paddingRight: '25px',
+          marginBottom: '50px'
         }}>
           Clear
         </Button>}
       </Container>
-    </Container>
+    </Box>
   )
 }
 

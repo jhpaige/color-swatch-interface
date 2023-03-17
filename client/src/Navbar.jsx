@@ -5,9 +5,9 @@ import { Container, Box } from "@mui/material";
 
 const Navbar = () => {
   return (
-    <Container id="navbar-container" disableGutters sx={{
+    <Box id="navbar-container" sx={{
       backgroundColor: 'rgb(54, 59, 59)',
-      width: '100%',
+      width: 'calc(100% - 10px)',
       height: 'fit-content',
       display: 'flex',
       alignItems: 'center',
@@ -20,9 +20,11 @@ const Navbar = () => {
         placeholder="Search"
         id="outlined-size-small"
         size="small"
-        sx={{m: 1.5}}
+        sx={{
+          m: 1.5
+        }}
       />
-    </Container>
+    </Box>
   )
 }
 

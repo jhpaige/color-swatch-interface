@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container, Button, Box } from '@mui/material';
-import './Sidebar.css'
 
 const Sidebar = ({ setSelectedCode, allColors, handleDetailClick }) => {
 
@@ -11,7 +10,11 @@ const Sidebar = ({ setSelectedCode, allColors, handleDetailClick }) => {
   }
 
   return (
-    <Box boxShadow='2' sx={{borderRight: 0.2, borderColor: "primary.main"}}>
+    <Box boxShadow='2' sx={{
+      borderRight: 0.2,
+      borderColor: "primary.main",
+      minHeight: 'calc(100vh - 69px)',
+    }}>
       <Container id="sidebar-container" disableGutters sx={{
         backgroundColor: 'rgb(214, 216, 216)',
         display: 'flex',

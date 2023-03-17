@@ -14,7 +14,7 @@ colorsController.getColors = (req, res, next) => {
   db.query(queryString).then((data) => {
     if (!data.rows.length){
       console.log('No colors in db');
-      res.locals.colorsInfo= false
+      res.locals.colorsInfo = false;
       return next();
     }
     // Array to Store colors, codes, and labels

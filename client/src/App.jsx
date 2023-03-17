@@ -39,7 +39,7 @@ const App = () => {
       setAllColors(json.colorsArr);
       return { success: true, data: json };
     } catch (error) {
-      console.log(error);
+      console.log('Server fetch unsuccessful: ', error);
       return { success: false };
     }
   }
@@ -51,7 +51,6 @@ const App = () => {
     for (let i = 0; i < allColors.length; i++) {
       if (allColors[i].code == newSelectedCode) {
         for (let j = i; j <= i + 4; j++) {
-          console.log(j);
           pagesArr.push(allColors[j]);
           if (j == allColors.length - 1) break;
         };

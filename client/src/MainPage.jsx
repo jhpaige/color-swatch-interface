@@ -54,11 +54,12 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
         direction="row"
         justifyContent="center"
         alignItems="center"
-        height="100%"
+        position='relative'
         padding='20px'
         paddingBottom={0}
         paddingTop={0}
         marginTop='20px'
+        height='calc(100% - (24px + 70px) - 20px)'
       >
         {pageSwatches.map(color => {
           return (
@@ -67,8 +68,10 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
               sm={color.code == selectedCode ? 12 : 4}
               md={color.code == selectedCode ? 12 : 3} item sx={{
                 alignItems: 'center',
+                maxHeight: '100%',
+                minHeight: 'fit-content',
                 width: color.code != selectedCode ? 'fit-content' : '100%',
-                height: color.code != selectedCode ? 'fit-content' : '60%'
+                position: 'relative'
               }}
             >
               <ColorSwatch key={'ColorSwatch' + color.code} colorCode={color.code} selectedCode={selectedCode} handleDetailClick={handleDetailClick} />
@@ -101,7 +104,8 @@ const MainPage = ({ inColors, selectedCode, setSelectedCode, pageSwatches, setPa
           whiteSpace: 'nowrap',
           paddingLeft: '25px',
           paddingRight: '25px',
-          marginBottom: '50px'
+          marginBottom: '50px',
+          position: 'relative'
         }}>
           Clear
         </Button>}

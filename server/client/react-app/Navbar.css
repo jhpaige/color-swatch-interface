@@ -1,0 +1,10 @@
+/* Set logo information and background color for search bar */
+.hh-logo {
+  height: 35px;
+  width: 35px;
+  margin: 17px;
+}
+
+.MuiInputBase-root {
+  background-color: white;
+}
